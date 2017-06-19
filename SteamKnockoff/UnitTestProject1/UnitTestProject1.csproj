@@ -53,6 +53,12 @@
     <Compile Include="Librarytests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SteamKnockoff\SteamKnockoff.csproj">
+      <Project>{9f999827-96cb-480a-83d1-8d6de3ebb367}</Project>
+      <Name>SteamKnockoff</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
