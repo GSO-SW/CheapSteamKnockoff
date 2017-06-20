@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SteamKnockoff
 {
@@ -33,6 +34,11 @@ namespace SteamKnockoff
             {
                 throw new NullReferenceException();
             }
+        }
+
+        public void XmlSpeichern()
+        {
+
         }
     }
 }

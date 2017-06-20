@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteamKnockoff;
+using System.IO;
 
 namespace UnitTestProject1
 {
@@ -30,5 +31,18 @@ namespace UnitTestProject1
             Spiel ISpiel = null;
             Library.SpielSpeichern(ISpiel);
         }
+
+        [TestMethod]
+        public void XmlSpeichern_erstellt_XmlDocument()
+        {
+            Library ILibrary = new Library();
+            ILibrary.XmlSpeichern();
+            FileInfo Xmlfile = new FileInfo(@"..//Saves/XmlSave.xml");
+            if (Xmlfile.Exists == false)
+            {
+                Assert.Fail();
+            }
+        }
+
     }
 }
