@@ -37,7 +37,7 @@ namespace UnitTestProject1
         {
             Library ILibrary = new Library();
             ILibrary.XmlSpeichern();
-            FileInfo Xmlfile = new FileInfo(@"..//Saves/XmlSave.xml");
+            FileInfo Xmlfile = new FileInfo(@"..\..\XmlSave.xml");
             if (Xmlfile.Exists == false)
             {
                 Assert.Fail();
