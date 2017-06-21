@@ -40,15 +40,21 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void XmlSpeichern_erstellt_XmlDocument()
+        public void XmlSpeichern_Schreibt_in_Xml_document()
         {
-            Library ILibrary = new Library();
-            ILibrary.XmlSpeichern();
             FileInfo Xmlfile = new FileInfo(@"..\..\XmlSave.xml");
-            if (Xmlfile.Exists == false)
+            Library ILibrary = new Library();
+            if (!ILibrary.XmlSpeichern())
             {
                 Assert.Fail();
             }
+        }
+        [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void XmlLaden_Datei_existiert_nicht()
+        {
+            Library ILibrary = new Library();
+            ILibrary.XmlLaden();
         }
 
     }
