@@ -9,6 +9,13 @@ namespace UnitTestProject1
     public class Librarytests
     {
         [TestMethod]
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void SpielHinzufügen_Spielpfad_Existiert_nicht_Exception()
+        {
+            Library ILibrary = new Library();
+            ILibrary.SpielHinzufügen("Dead Island", "19.06.2017 10:30", "NA", @"C:\Games\Dead Island Definitive Edition\NotDeadIslandGame.exe", "Horror, RPG", "THQ", 6);
+        }
+        [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
         public void SpielHinzufügen_Spielattribut_ist_NULL()
         {
@@ -20,12 +27,12 @@ namespace UnitTestProject1
         public void SpielHinzufügen_Spiel_ist_in_der_liste()
         {
             Library ILibrary = new Library();
-            ILibrary.SpielHinzufügen("Dead Island", "19.06.2017 10:30", "NA", "C:\\Games\\Dead Island Definitive Edition\\DeadIslandGame.exe", "Horror, RPG", "THQ", 6);
+            ILibrary.SpielHinzufügen("Dead Island", "19.06.2017 10:30", "NA", @"C:\Games\Dead Island Definitive Edition\DeadIslandGame.exe", "Horror, RPG", "THQ", 6);
             Assert.AreEqual("Dead Island", ILibrary.SpieleListe[0].Titel);
         }
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException))]
-        public void SpielSpeichern_uebergebenes_Spiel_löst_Exception_aus()
+        public void SpielSpeichern_uebergebenes_Spiel_löst_NullReferenceException_aus()
         {
             Library ILibrary = new Library();
             Spiel ISpiel = null;
