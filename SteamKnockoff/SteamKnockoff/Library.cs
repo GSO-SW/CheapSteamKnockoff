@@ -97,12 +97,21 @@ namespace SteamKnockoff
             }
             XmlDocument doc = new XmlDocument();
             //Löst eine XmlException aus wenn die datei vorhanden ist, es aber keine Knoten gibt.
-            doc.Load(XmlPath);
+            try
+            {
+                doc.Load(XmlPath);
+            }
+            catch (XmlException)
+            {
+                XmlSpeichern(DefaultXmlPath);
+                doc.Load(XmlPath);
+            }
             //Root Knoten in ein XmlElement laden
             XmlElement RootNode = doc.DocumentElement;
             //Für jedes XML Element aus dem Root Knoten die Schleife ausführen
             try
             {
+                SpieleListe.Clear();
                 foreach (XmlNode Spiel in RootNode.ChildNodes)
                 {
                     Spiel ISpiel = new Spiel();

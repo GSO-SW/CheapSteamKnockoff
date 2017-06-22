@@ -19,8 +19,10 @@ namespace SteamKnockoff
             Library ILibrary = new Library();
             ILibrary.SpieleListe.Clear();
             File.Create(ILibrary.DefaultXmlPath).Close();
+            ILibrary.SpielHinzufügen("League of Legends", "19.06.2017 10:30", "NA", @"D:\Games\Riot Games\League of Legends\lol.launcher.exe", "Horror, RPG", "THQ", 6);
             ILibrary.XmlLaden(ILibrary.DefaultXmlPath);
-            ILibrary.SpieleListe.Clear();
+            listBox1.DataSource = ILibrary.SpieleListe;
+            listBox1.DisplayMember = "Titel";
         }
     }
 }
