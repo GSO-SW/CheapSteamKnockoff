@@ -15,6 +15,9 @@ namespace SteamKnockoff
         public Form1()
         {
             InitializeComponent();
+            Library ILibrary = new Library();
+            ILibrary.SpielHinzufügen("Dead Island", "19.06.2017 10:30", "NA", @"C:\Games\Dead Island Definitive Edition\DeadIslandGame.exe", "Horror, RPG", "THQ", 6);
+            ILibrary.SpieleListe.Clear();
         }
     }
 }

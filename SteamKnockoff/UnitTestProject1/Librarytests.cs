@@ -27,6 +27,7 @@ namespace UnitTestProject1
         public void SpielHinzufügen_Spiel_ist_in_der_liste()
         {
             Library ILibrary = new Library();
+            ILibrary.SpieleListe.Clear();
             ILibrary.SpielHinzufügen("Dead Island", "19.06.2017 10:30", "NA", @"C:\Games\Dead Island Definitive Edition\DeadIslandGame.exe", "Horror, RPG", "THQ", 6);
             Assert.AreEqual("Dead Island", ILibrary.SpieleListe[0].Titel);
         }
@@ -36,18 +37,23 @@ namespace UnitTestProject1
         {
             FileInfo Xmlfile = new FileInfo(@"..\..\XmlSave.xml");
             Library ILibrary = new Library();
-            if (!ILibrary.XmlSpeichern())
-            {
-                Assert.Fail();
-            }
+            Assert.IsTrue(ILibrary.XmlSpeichern(ILibrary.DefaultXmlPath));
         }
         [TestMethod]
         [ExpectedException(typeof(FileNotFoundException))]
         public void XmlLaden_Datei_existiert_nicht()
         {
             Library ILibrary = new Library();
-            ILibrary.XmlLaden();
+            File.Delete(ILibrary.DefaultXmlPath);
+            ILibrary.XmlLaden(ILibrary.DefaultXmlPath);
         }
 
+        [TestMethod]
+        public void XmlLaden_auslesen_des_Dokuments_erfolgreich()
+        {
+            Library ILibrary = new Library();
+            Assert.IsTrue(ILibrary.XmlLaden(ILibrary.DefaultXmlPath));
+
+        }
     }
 }
