@@ -30,14 +30,6 @@ namespace UnitTestProject1
             ILibrary.SpielHinzufügen("Dead Island", "19.06.2017 10:30", "NA", @"C:\Games\Dead Island Definitive Edition\DeadIslandGame.exe", "Horror, RPG", "THQ", 6);
             Assert.AreEqual("Dead Island", ILibrary.SpieleListe[0].Titel);
         }
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void SpielSpeichern_uebergebenes_Spiel_löst_NullReferenceException_aus()
-        {
-            Library ILibrary = new Library();
-            Spiel ISpiel = null;
-            Library.SpielSpeichern(ISpiel);
-        }
 
         [TestMethod]
         public void XmlSpeichern_Schreibt_in_Xml_document()

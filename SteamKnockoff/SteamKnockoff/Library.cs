@@ -40,14 +40,6 @@ namespace SteamKnockoff
             SpieleListe.Add(ISpiel);
         }
 
-        public static void SpielSpeichern(Spiel ISpiel)
-        {
-            if (ISpiel == null)
-            {
-                throw new NullReferenceException();
-            }
-        }
-
         /// <summary>
         /// 
         /// </summary>
