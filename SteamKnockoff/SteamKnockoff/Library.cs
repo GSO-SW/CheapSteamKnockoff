@@ -8,6 +8,7 @@ using System.Xml;
 using System.IO;
 using System.Xml.Serialization;
 using System.Xml.Linq;
+using System.Windows.Forms;
 
 namespace SteamKnockoff
 {
@@ -17,6 +18,16 @@ namespace SteamKnockoff
 
         public string DefaultXmlPath = @"..\..\XmlSave.xml";
 
+        /// <summary>
+        /// Fügt ein Spiel mit dén angegebenen Parametern in die Spieleliste hinzu.
+        /// </summary>
+        /// <param name="Titel"></param>
+        /// <param name="Datum"></param>
+        /// <param name="LetztesSpielDatum"></param>
+        /// <param name="Installationspfad"></param>
+        /// <param name="Kategorie"></param>
+        /// <param name="Publisher"></param>
+        /// <param name="USK"></param>
         public void SpielHinzufügen(string Titel, string Datum, string LetztesSpielDatum, string Installationspfad, string Kategorie, string Publisher, int USK)
          {
             //Es wird überprüft ob eines der Attribute null ist
@@ -24,7 +35,7 @@ namespace SteamKnockoff
             {
                 throw new NullReferenceException("Eines der übergebenen Parameter an Libary.SpielHinzufügen() hat eine Exception vom Typ NullReferenceException ausgelöst.");
             }
-            //Es wird überprüft ob der Installationspfad Existiert#
+            //Es wird überprüft ob der Installationspfad Existiert
             if (!File.Exists(Installationspfad))
             {
                 throw new FileNotFoundException();
@@ -41,7 +52,7 @@ namespace SteamKnockoff
         }
 
         /// <summary>
-        /// 
+        /// SPeichert die SPiele aus der SpieleListe in Xml-Format in eine XmlDokument im angegebenen Pfad.
         /// </summary>
         /// <returns>Gibt true zurück wenn das Speichern erfolgreich war und ansonsten false.</returns>
         public bool XmlSpeichern(string XmlPath)
@@ -72,18 +83,20 @@ namespace SteamKnockoff
 
 
         /// <summary>
-        /// 
+        /// Läd die Spiele aus einem XmlDokument im angegebenen Pfad in die Spieleliste.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Gibt true zurück wenn das laden der XmlAttribute in die Instanzen der Spiele erfolgreich war.
+        /// Gibt false zurück wenn das laden der Attribute fehlgeschlagen ist.</returns>
         public bool XmlLaden(string XmlPath)
         {
             int i = 0;
+            //Falls das Dokument nicht existiert wird es erstellt und ein XmlKnoten angefügt.
             if (!File.Exists(XmlPath))
             {
-                File.Create(XmlPath);
-                throw new FileNotFoundException("Savefile was not found. Creating new document");
+                XmlSpeichern(XmlPath);
             }
             XmlDocument doc = new XmlDocument();
+            //Löst eine XmlException aus wenn die datei vorhanden ist, es aber keine Knoten gibt.
             doc.Load(XmlPath);
             //Root Knoten in ein XmlElement laden
             XmlElement RootNode = doc.DocumentElement;
@@ -92,18 +105,21 @@ namespace SteamKnockoff
             {
                 foreach (XmlNode Spiel in RootNode.ChildNodes)
                 {
-                    SpieleListe[i].Titel = Spiel.Name;
-                    SpieleListe[i].Datum = Spiel.Attributes["Datum"].InnerText;
-                    SpieleListe[i].LetztesSpielDatum = Spiel.Attributes["LetztesSpielDatum"].InnerText;
-                    SpieleListe[i].InstallationsPfad = Spiel.Attributes["InstallationsPfad"].InnerText;
-                    SpieleListe[i].Kategorie = Spiel.Attributes["Kategorie"].InnerText;
-                    SpieleListe[i].Publisher = Spiel.Attributes["Publisher"].InnerText;
-                    SpieleListe[i].USK = Convert.ToInt32(Spiel.Attributes["Publisher"].InnerText);
+                    Spiel ISpiel = new Spiel();
+                    ISpiel.Titel = Spiel.Name;
+                    ISpiel.Datum = Spiel.Attributes["Datum"].InnerText;
+                    ISpiel.LetztesSpielDatum = Spiel.Attributes["LetztesSpielDatum"].InnerText;
+                    ISpiel.InstallationsPfad = Spiel.Attributes["InstallationsPfad"].InnerText;
+                    ISpiel.Kategorie = Spiel.Attributes["Kategorie"].InnerText;
+                    ISpiel.Publisher = Spiel.Attributes["Publisher"].InnerText;
+                    ISpiel.USK = Convert.ToInt32(Spiel.Attributes["USK"].InnerText);
+                    SpieleListe.Add(ISpiel);
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MessageBox.Show("Exception" + e.Message);
                 return false;
             }
         }

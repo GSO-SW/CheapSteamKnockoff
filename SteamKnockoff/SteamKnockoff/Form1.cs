@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SteamKnockoff
 {
@@ -16,7 +17,9 @@ namespace SteamKnockoff
         {
             InitializeComponent();
             Library ILibrary = new Library();
-            ILibrary.SpielHinzufügen("Dead Island", "19.06.2017 10:30", "NA", @"C:\Games\Dead Island Definitive Edition\DeadIslandGame.exe", "Horror, RPG", "THQ", 6);
+            ILibrary.SpieleListe.Clear();
+            File.Create(ILibrary.DefaultXmlPath).Close();
+            ILibrary.XmlLaden(ILibrary.DefaultXmlPath);
             ILibrary.SpieleListe.Clear();
         }
     }

@@ -39,21 +39,13 @@ namespace UnitTestProject1
             Library ILibrary = new Library();
             Assert.IsTrue(ILibrary.XmlSpeichern(ILibrary.DefaultXmlPath));
         }
-        [TestMethod]
-        [ExpectedException(typeof(FileNotFoundException))]
-        public void XmlLaden_Datei_existiert_nicht()
-        {
-            Library ILibrary = new Library();
-            File.Delete(ILibrary.DefaultXmlPath);
-            ILibrary.XmlLaden(ILibrary.DefaultXmlPath);
-        }
 
         [TestMethod]
         public void XmlLaden_auslesen_des_Dokuments_erfolgreich()
         {
             Library ILibrary = new Library();
             Assert.IsTrue(ILibrary.XmlLaden(ILibrary.DefaultXmlPath));
-
+            File.Delete(ILibrary.DefaultXmlPath);
         }
     }
 }
