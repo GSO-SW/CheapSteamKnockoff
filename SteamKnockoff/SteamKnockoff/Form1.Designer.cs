@@ -46,6 +46,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.USKBox = new System.Windows.Forms.TextBox();
             this.StartButton = new System.Windows.Forms.Button();
+            this.OKButton = new System.Windows.Forms.Button();
+            this.ErstellError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox1
@@ -65,6 +67,7 @@
             this.HinzufügenButton.TabIndex = 1;
             this.HinzufügenButton.Text = "Hinzufügen";
             this.HinzufügenButton.UseVisualStyleBackColor = true;
+            this.HinzufügenButton.Click += new System.EventHandler(this.HinzufügenButton_Click);
             // 
             // EntfernenButton
             // 
@@ -196,12 +199,34 @@
             this.StartButton.TabIndex = 17;
             this.StartButton.Text = "Start";
             this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // OKButton
+            // 
+            this.OKButton.Location = new System.Drawing.Point(360, 69);
+            this.OKButton.Name = "OKButton";
+            this.OKButton.Size = new System.Drawing.Size(75, 23);
+            this.OKButton.TabIndex = 18;
+            this.OKButton.Text = "OK";
+            this.OKButton.UseVisualStyleBackColor = true;
+            this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
+            // 
+            // ErstellError
+            // 
+            this.ErstellError.AutoSize = true;
+            this.ErstellError.Location = new System.Drawing.Point(360, 99);
+            this.ErstellError.Name = "ErstellError";
+            this.ErstellError.Size = new System.Drawing.Size(231, 13);
+            this.ErstellError.TabIndex = 19;
+            this.ErstellError.Text = "Spiel existiert nicht oder falsches Eingabeformat";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 445);
+            this.Controls.Add(this.ErstellError);
+            this.Controls.Add(this.OKButton);
             this.Controls.Add(this.StartButton);
             this.Controls.Add(this.USKBox);
             this.Controls.Add(this.label7);
@@ -247,6 +272,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox USKBox;
         private System.Windows.Forms.Button StartButton;
+        private System.Windows.Forms.Button OKButton;
+        private System.Windows.Forms.Label ErstellError;
     }
 }
 

@@ -65,7 +65,7 @@ namespace SteamKnockoff
         }
 
         /// <summary>
-        /// SPeichert die SPiele aus der SpieleListe in Xml-Format in eine XmlDokument im angegebenen Pfad.
+        /// Speichert die SPiele aus der SpieleListe in Xml-Format in eine XmlDokument im angegebenen Pfad.
         /// </summary>
         /// <returns>Gibt true zurück wenn das Speichern erfolgreich war und ansonsten false.</returns>
         public bool XmlSpeichern(string XmlPath)

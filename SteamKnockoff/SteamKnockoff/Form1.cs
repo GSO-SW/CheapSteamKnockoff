@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Diagnostics;
 
 namespace SteamKnockoff
 {
@@ -29,13 +30,23 @@ namespace SteamKnockoff
             {
                 listBox1.SelectedIndex = 0;
             }
+            bs.ResetBindings(false);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bs.ResetBindings(false);
+            TitelBox.Clear();
+            DatumBox.Clear();
+            LetztesSpielDatumBox.Clear();
+            InstallationspfadBox.Clear();
+            KategorieBox.Clear();
+            PublisherBox.Clear();
+            USKBox.Clear();
             if (listBox1.SelectedIndex >= 0)
             {
+                OKButton.Hide();
+                StartButton.Show();
+                ErstellError.Hide();
                 TitelBox.Text = ILibrary.SpieleListe[listBox1.SelectedIndex].Titel;
                 DatumBox.Text = ILibrary.SpieleListe[listBox1.SelectedIndex].Datum;
                 LetztesSpielDatumBox.Text = ILibrary.SpieleListe[listBox1.SelectedIndex].LetztesSpielDatum;
@@ -48,17 +59,47 @@ namespace SteamKnockoff
 
         private void EntfernenButton_Click(object sender, EventArgs e)
         {
-            try
+            if (listBox1.SelectedIndex != -1 && listBox1.SelectedIndex <= listBox1.Items.Count -1)
             {
                 ILibrary.SpielLöschen(listBox1.SelectedIndex);
-
-            }
-            catch (IndexOutOfRangeException)
-            {
-
-                throw;
             }
             bs.ResetBindings(false);
+            ILibrary.XmlSpeichern(ILibrary.DefaultXmlPath);
+        }
+
+        private void HinzufügenButton_Click(object sender, EventArgs e)
+        {
+            listBox1.SelectedIndex = -1;
+            OKButton.Show();
+            TitelBox.Clear();
+            DatumBox.Clear();
+            LetztesSpielDatumBox.Clear();
+            InstallationspfadBox.Clear();
+            KategorieBox.Clear();
+            PublisherBox.Clear();
+            USKBox.Clear();
+            StartButton.Hide();
+        }
+
+        private void OKButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ILibrary.SpielHinzufügen(TitelBox.Text, DatumBox.Text, LetztesSpielDatumBox.Text, InstallationspfadBox.Text, KategorieBox.Text, PublisherBox.Text, Convert.ToInt32(USKBox.Text));
+                bs.ResetBindings(false);
+                ILibrary.XmlSpeichern(ILibrary.DefaultXmlPath);
+            }
+            catch (FormatException)
+            {
+                ErstellError.Show();
+            }
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            ProcessStartInfo start = new ProcessStartInfo();
+            start.FileName = InstallationspfadBox.Text;
+            Process.Start(start);
         }
     }
 }
