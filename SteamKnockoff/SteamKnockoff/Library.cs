@@ -51,6 +51,16 @@ namespace SteamKnockoff
             SpieleListe.Add(ISpiel);
         }
 
+        public void SpielLöschen(int index)
+        {
+            if (index > SpieleListe.Count - 1)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            SpieleListe.RemoveAt(index);
+            SpieleListe.Sort((x, y) => x.Titel.CompareTo(y.Titel));
+        }
+
         /// <summary>
         /// SPeichert die SPiele aus der SpieleListe in Xml-Format in eine XmlDokument im angegebenen Pfad.
         /// </summary>
@@ -124,6 +134,7 @@ namespace SteamKnockoff
                     ISpiel.USK = Convert.ToInt32(Spiel.Attributes["USK"].InnerText);
                     SpieleListe.Add(ISpiel);
                 }
+                SpieleListe.Sort((x, y) => x.Titel.CompareTo(y.Titel));
                 return true;
             }
             catch (Exception e)

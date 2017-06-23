@@ -47,5 +47,14 @@ namespace UnitTestProject1
             Assert.IsTrue(ILibrary.XmlLaden(ILibrary.DefaultXmlPath));
             File.Delete(ILibrary.DefaultXmlPath);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void SpielLöschen_indexOutOfRange()
+        {
+            int i = 0;
+            Library ILibrary = new Library();
+            ILibrary.SpielLöschen(i);
+        }
     }
 }
