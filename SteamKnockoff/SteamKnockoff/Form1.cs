@@ -20,7 +20,6 @@ namespace SteamKnockoff
         {
             InitializeComponent();
             ILibrary.XmlLaden(ILibrary.DefaultXmlPath);
-            ILibrary.SpielHinzufügen("League of legends", "23.06.2017", "NA", @"D:\Games\Riot Games\League of Legends\lol.launcher.exe", "MOBA", "RIOT", 0);
             bs.DataSource = ILibrary.SpieleListe;
             // Bindet die Spielelist als Quelle and die listBox1
             listBox1.DataSource = bs;
