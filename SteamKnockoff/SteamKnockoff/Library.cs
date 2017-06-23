@@ -51,6 +51,10 @@ namespace SteamKnockoff
             SpieleListe.Add(ISpiel);
         }
 
+        /// <summary>
+        /// Löscht das Spiel am angegebenen Index
+        /// </summary>
+        /// <param name="index"></param>
         public void SpielLöschen(int index)
         {
             if (index > SpieleListe.Count - 1)
@@ -58,7 +62,6 @@ namespace SteamKnockoff
                 throw new IndexOutOfRangeException();
             }
             SpieleListe.RemoveAt(index);
-            SpieleListe.Sort((x, y) => x.Titel.CompareTo(y.Titel));
         }
 
         /// <summary>
@@ -113,7 +116,7 @@ namespace SteamKnockoff
             }
             catch (XmlException)
             {
-                XmlSpeichern(DefaultXmlPath);
+                XmlSpeichern(XmlPath);
                 doc.Load(XmlPath);
             }
             //Root Knoten in ein XmlElement laden

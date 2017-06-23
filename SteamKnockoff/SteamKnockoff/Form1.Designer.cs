@@ -45,6 +45,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.USKBox = new System.Windows.Forms.TextBox();
+            this.StartButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -54,6 +55,7 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(221, 316);
             this.listBox1.TabIndex = 0;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // HinzufügenButton
             // 
@@ -72,6 +74,7 @@
             this.EntfernenButton.TabIndex = 2;
             this.EntfernenButton.Text = "Entfernen";
             this.EntfernenButton.UseVisualStyleBackColor = true;
+            this.EntfernenButton.Click += new System.EventHandler(this.EntfernenButton_Click);
             // 
             // TitelBox
             // 
@@ -185,11 +188,21 @@
             this.USKBox.Size = new System.Drawing.Size(100, 20);
             this.USKBox.TabIndex = 16;
             // 
+            // StartButton
+            // 
+            this.StartButton.Location = new System.Drawing.Point(360, 27);
+            this.StartButton.Name = "StartButton";
+            this.StartButton.Size = new System.Drawing.Size(75, 23);
+            this.StartButton.TabIndex = 17;
+            this.StartButton.Text = "Start";
+            this.StartButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 445);
+            this.Controls.Add(this.StartButton);
             this.Controls.Add(this.USKBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -233,6 +246,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox USKBox;
+        private System.Windows.Forms.Button StartButton;
     }
 }
 

@@ -17,6 +17,9 @@ namespace SteamKnockoff
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            //Die Spielliste wird gespeichert falls die Form geschlossen wird
+            Library ILibrary = new Library();
+            ILibrary.XmlSpeichern(ILibrary.DefaultXmlPath);
         }
     }
 }
